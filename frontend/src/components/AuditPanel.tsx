@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { TenderDetail, AuditLogItem } from '../types';
+import { API_BASE_URL } from '../config';
 import {
   FileText,
   AlertTriangle,
@@ -52,7 +53,7 @@ export const AuditPanel: React.FC<AuditPanelProps> = ({
     try {
       // tender_id may have slashes, encode each path component or direct URL
       const encodedId = encodeURIComponent(tender.tender_id);
-      const res = await fetch(`http://localhost:8000/api/tenders/${encodedId}/audit`, {
+      const res = await fetch(`${API_BASE_URL}/api/tenders/${encodedId}/audit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -10,10 +10,12 @@ shap>=0.44
 sqlalchemy>=2.0
 alembic>=1.13
 psycopg2-binary
+python-dotenv
 
 # --- Ingestion & Parsing ---
 pdfplumber
-python-magic-bin
+python-magic-bin; sys_platform == 'win32'
+python-magic; sys_platform != 'win32'
 
 # --- Backend API ---
 fastapi

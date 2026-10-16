@@ -3,6 +3,7 @@ import type { TenderDetail, AuditLogItem } from '../types';
 import { ExplainabilityPane } from './ExplainabilityPane';
 import { AuditPanel } from './AuditPanel';
 import { ArrowLeft, Loader2, AlertCircle, RefreshCw } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 interface InvestigationViewProps {
   tenderId: string;
@@ -24,7 +25,7 @@ export const InvestigationView: React.FC<InvestigationViewProps> = ({
     setError(null);
     try {
       const encodedId = encodeURIComponent(tenderId);
-      const res = await fetch(`http://localhost:8000/api/tenders/${encodedId}`);
+      const res = await fetch(`${API_BASE_URL}/api/tenders/${encodedId}`);
       if (!res.ok) {
         throw new Error(`Failed to load tender details (${res.status})`);
       }

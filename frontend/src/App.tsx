@@ -5,6 +5,7 @@ import { TriageTable } from './components/TriageTable';
 import { InvestigationView } from './components/InvestigationView';
 import type { SummaryMetrics, TenderListItem } from './types';
 import { AlertCircle, Loader2, RefreshCw } from 'lucide-react';
+import { API_BASE_URL } from './config';
 
 export const App: React.FC = () => {
   const [tenders, setTenders] = useState<TenderListItem[]>([]);
@@ -19,12 +20,12 @@ export const App: React.FC = () => {
     setError(null);
     try {
       const [summaryRes, tendersRes] = await Promise.all([
-        fetch('http://localhost:8000/api/summary'),
-        fetch('http://localhost:8000/api/tenders'),
+        fetch(`${API_BASE_URL}/api/summary`),
+        fetch(`${API_BASE_URL}/api/tenders`),
       ]);
 
       if (!summaryRes.ok || !tendersRes.ok) {
-        throw new Error('Failed to connect to Sentinel backend service at http://localhost:8000');
+        throw new Error(`Failed to connect to Sentinel backend service at ${API_BASE_URL}`);
       }
 
       const summaryData = await summaryRes.json();
